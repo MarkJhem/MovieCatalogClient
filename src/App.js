@@ -1,30 +1,33 @@
-import { useState, useEffect } from 'react';
-import './App.css';
+// React
+import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// BS
 import { Container } from 'react-bootstrap';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+// CSS
+import './App.css';
+// UserContext
+import { UserProvider } from './UserContext';
+// Components
 import AppNavbar from './components/AppNavbar';
-// import Banner from './components/Banner';
-// import Highlights from './components/Highlights';
+// Pages
 import Home from './pages/Home';
-import Courses from './pages/Courses';
-import CourseView from './pages/CourseView';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
-import Profile from './pages/Profile';
-import AddCourse from './pages/AddCourse';
-import Error from './pages/Error';
-import { UserProvider } from './UserContext';
+
+import Movies from './pages/Movies';
+
+
+
 
 function App() {
-
-
-  // Global user state
+  // Default user state
   const [user, setUser] = useState({
     id: null,
     isAdmin: null
   })
-  
+
+
   useEffect(() => {
 
     fetch(`https://movieapi-amerna.onrender.com/users/details`, {
@@ -56,44 +59,31 @@ function App() {
 
   }, []);
 
-  // Function for clearing the localStorage on logout
+  // Unset User
   const unsetUser = () => {
+
     localStorage.clear();
-  }
+
+  };
+
+
 
   return (
-    <UserProvider value={{user, setUser, unsetUser}}>
+    <UserProvider value={{ user, setUser, unsetUser }}>
       <Router>
         <AppNavbar />
         <Container>
-        
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/courses" element={<Courses />} />
-            <Route path="/courses/:courseId" element={<CourseView />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/logout" element={<Logout/>} />
-            <Route path="/profile" element={<Profile/>} />
-            <Route path="/addCourse" element={<AddCourse/>} />
-            <Route path="*" element={<Error />} />
-
-
             <Route path='/' element={<Home />} />
-
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
             <Route path='/logout' element={<Logout />} />
-
-            <Route path='/workout' element={<Movie />} />
-
-
-            <Route path='/addmovie' element={<Movie />} />
+            <Route path='/movies' element={<Movies />} />
           </Routes>
         </Container>
       </Router>
-      </UserProvider>
-  );
+    </UserProvider>
+  )
 }
 
 export default App;

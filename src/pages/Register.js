@@ -6,18 +6,19 @@ import UserContext from '../UserContext';
 
 export default function Register() {
 
-	
+    // First Name
+    // Email
+    // password
+
     const { user } = useContext(UserContext);
     const navigate = useNavigate();
 
     const [mobileNo, setMobileNo] = useState("");
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
     const [isActive, setIsActive] = useState(false);
-
 
     useEffect(() => {
 
@@ -28,12 +29,10 @@ export default function Register() {
         }
 
         if(user.id){
-            navigate('/workout')
+            navigate('/movies')
         }
 
     }, [email, password, confirmPassword, navigate, user.id])
-
-
 
     function registerUser(e) {
 
@@ -46,7 +45,6 @@ export default function Register() {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-               
                 mobileNo:  mobileNo,
                 email: email,
                 password: password
@@ -62,7 +60,6 @@ export default function Register() {
                 //data will only contain an email property if we can properly save our user.
                 if (data.message === "Registered Successfully") {
 
-                  
                     setMobileNo('');
                     setEmail('');
                     setPassword('');
@@ -74,45 +71,13 @@ export default function Register() {
                         text: "Thank you for registering!"
                     });
 
-                } else if(data.message === "Duplicate email found"){
-
-                    Swal.fire({
-                        title: "Email Already Registered",
-                        icon: "error",
-                        text: "Please use a different email to register!"
-                    });
-    
-                } else if(data.message === "Mobile number invalid"){
-                    
-                    Swal.fire({
-                        title: "Mobile number invalid",
-                        icon: "warning",
-                        text: "Please enter an 11-digit number!"
-                    });
-                    
-                } else if(data.message === "Password must be atleast 8 characters"){
-                    
-                    Swal.fire({
-                        title: "Password not valid",
-                        icon: "warning",
-                        text: "Your password must be at least 8 characters long!"
-                    });
-
-                } else {
-                    
-                    Swal.fire({
-                        title: "Error",
-                        text: "Something went wrong.",
-                        icon: "error"
-                    });
-
                 }
 
             })
     }
-    
 
-	return (
+
+    return (
 
         <>
 
@@ -179,6 +144,6 @@ export default function Register() {
         </Form>
         </div>
         </>
-		
-		)
+
+    )
 }
