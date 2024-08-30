@@ -1,0 +1,28 @@
+{
+    
+    "user": {
+        "user": "user@mail.com",
+        "password": "user1234"
+    },
+
+    "admin": {
+        "user": "admin@mail.com",
+        "password": "admin1234"
+    },
+
+    "domain URL": {
+        "URL" : "https://movie-catalog-client.vercel.app/"
+    },
+
+    "endpoints": {
+        "login":"/login",
+        "register":"/register",
+        "addMovie": "/addMovie",
+        "getAllMovies":"/getMovies",
+        "getMovieById":"/getMovie",
+        "updateMovie":"/updateMovie",
+        "deleteMovie":"/deleteMovie",
+        "addMovieComment":"/addComment",
+        "getMovieComments":"/getComments"
+    }
+}
